@@ -62,23 +62,27 @@ h1 {
     }
 }
 .task {
-    display: flexbox;
+    display: flex;
     text-align : center;
-    margin: 20px auto;
+    margin: 10px auto;
     width: 40%;
+    max-height: 50px;
     color: black;
     background-color: white;
     border-radius: 20px;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
     justify-content: space-around;
     align-items: center;
     button{
-        margin-left: 10px;
-        border-radius: 10px;
+        margin-left: auto;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
         border: none;
         background-color: black;
         color: white;
-        padding: 5px;
+        padding: 28px;
         cursor: pointer;
     }
 }
