@@ -1,0 +1,62 @@
+:root {
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(45deg, rgb(117, 9, 180) , rgb(10, 147, 152));
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    width: 100%;
+    margin: 100px auto;
+}
+
+.todos-box {
+    display: block;
+    width: 50%;
+    height: 200px;
+    max-height: 300px;
+    overflow-y: scroll;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 50px;
+    .empty-tasks {
+        color: lightgray;
+        font-size: 24px;
+        margin: 20px auto;
+    }
+}
+
+.adding-section {
+    display: flexbox;
+    width: 50%;
+    text-align: center;
+    align-content: center;
+    margin: 200px auto;
+    * {
+        display: block;
+        margin: auto;
+        padding: 10px;
+    }
+    .task-input {
+        border-radius: 10px;
+        border: none;
+        margin-bottom: 10px;
+        outline: none;
+        width: 40%;
+    }
+    .add {
+        background-color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 20px;
+        cursor: pointer;
+    }
+    .add:hover {
+        background-color: lightgray;
+    }
+}
