@@ -65,6 +65,12 @@ h1 {
     display: flexbox;
     text-align : center;
     margin: 20px auto;
-    width: 30%;
-    color: white;
+    width: 40%;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    .delete{
+        margin-left: 10px;
+    }
 }
