@@ -18,6 +18,7 @@ function addTask(){
     };
     newDiv.appendChild(deleteBtn);
     document.body.appendChild(newDiv);
+    i++;
 }
 
 btn.addEventListener("click" , addTask);
