@@ -11,11 +11,18 @@ function addTask(){
     newDiv.className = `task task${x}`;
     newDiv.innerHTML = text;
     const deleteBtn = document.createElement("button");
-    deleteBtn.className = `task${x}`;
+    deleteBtn.className = `task${x} delete`;
     deleteBtn.innerHTML = "Delete";
     deleteBtn.onclick = function(){
-        document.querySelector(`.task.${deleteBtn.getAttribute("class")}`).remove();
+        document.querySelector(`.task.${deleteBtn.classList[0]}`).remove();
     };
+    const finishedBtn = document.createElement("button");
+    finishedBtn.className = `done${x} finished`;
+    finishedBtn.innerHTML = "Finished";
+    finishedBtn.onclick = function(){
+        document.querySelector(`.task.${finishedBtn.classList[0]}`).remove();
+    };
+    newDiv.appendChild(finishedBtn);
     newDiv.appendChild(deleteBtn);
     document.body.appendChild(newDiv);
     i++;

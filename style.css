@@ -75,14 +75,24 @@ h1 {
     padding-left: 10px;
     justify-content: space-around;
     align-items: center;
-    button{
+    .delete{
         margin-left: auto;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         border: none;
-        background-color: black;
+        background-color: red;
         color: white;
-        padding: 28px;
+        padding: 27px;
+        cursor: pointer;
+    }
+    .finished {
+        margin-right: auto;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border: none;
+        background-color: green;
+        color: white;
+        padding: 27px;
         cursor: pointer;
     }
 }
