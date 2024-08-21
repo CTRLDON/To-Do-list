@@ -12,4 +12,10 @@ function addTask(){
 }
 
 btn.addEventListener("click" , addTask);
+document.addEventListener("keypress",function(event){
+    if(event.key == 'Enter'){
+        event.preventDefault(); 
+        addTask();
+    }
+});
 
