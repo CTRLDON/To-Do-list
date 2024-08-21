@@ -1,4 +1,4 @@
-let btn = document.getElementById("add");
+let btn = document.getElementById("add"); // Button for the code
 
 function addTask() {
     let input = document.getElementById("task-input");
