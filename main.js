@@ -1,9 +1,9 @@
-let btn = document.getElementById("add");
+const btn = document.getElementById("add");
 
 function addTask() {
-    let input = document.getElementById("task-input");
+    const input = document.getElementById("task-input");
     console.log(input.value);
 }
 
-btn.onclick = addTask();
+btn.addEventListener("click" , addTask);
 
