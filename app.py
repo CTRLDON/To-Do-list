@@ -40,4 +40,4 @@ def addTask():
 if __name__ == '__main__':
     hostname = socket.gethostname()
     ip_address = socket.gethostbyname(hostname)
-    app.run(ip_address,5050,debug=True)
+    app.run(ip_address,port=5050,debug=True)
