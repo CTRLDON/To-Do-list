@@ -1,15 +1,22 @@
-import flask
-from flask_sqlalchemy import SQLAlchemy
-import socket
-import os
+import flask #Flask Framework
+from flask_sqlalchemy import SQLAlchemy # Python(JS input) -> SQL
+import socket # Local IP
+import os # Path configuration
 from flask import request
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = os.path.abspath(os.path.dirname(__file__)) # importaing main files Directory
+#init Flask Object: app
 app = flask.Flask(__name__)
+# confiuring flask to have database path 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir,"database.db")}"
+# SQL object database called (db)
 db = SQLAlchemy(app)
 
-class Task(db.Model):
+class Task(db): #try to use db.Model
+    
+    '''input: data base model -> obj type: SQLAlchemy object
+    output: Task object'''
+
     id = db.Column(db.Integer , primary_key=True)
     task = db.Column(db.String(200), nullable =False)
     status = db.Column(db.String(100) , nullable =False)
