@@ -1,8 +1,10 @@
 def upper(func):
-    output = func()
-    return output.upper()
+    def wrapper():
+        output = func()
+        return output.upper()
+    return wrapper
 
-@upper()
+@upper
 def osama():
     return "osama"
 
