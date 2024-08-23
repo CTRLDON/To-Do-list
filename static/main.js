@@ -28,9 +28,9 @@ function addTask(){
             $.ajax({
                 url : "/addtask",
                 type : "POST",
-                data : {
+                data : JSON.stringify({
                     'info' : text
-                },
+                }),
                 success : function(response) {
                     alert("success");
                 },
