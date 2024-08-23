@@ -6,26 +6,8 @@ const input = document.getElementById("task-input");
 var i = 1 // the unique ID variable
 
 function addTask(){
-    // creating an api to communicate between the page and the server (flask server) to send data from the input field (task-input) 
-    $.ajax({
-        url : "/addtask", //The url that when routed to it will trigger the API
-        type : "POST", // makes the type of the API POST meaning that it will going to send data to the server not reading data from the server
-        // the data that will be sent
-        data : JSON.stringify({
-            'info' : text
-        }),
-        // a function that if the process was a success it will be triggered
-        success : function(response) {
-            alert("success");
-        },
-        // a function the if the process was a failure it will be triggered
-        error: function(error) {
-            console.log('Error:', error);
-        }
-    });
-    // ------------------------------------------------------------------------
     const x = i; // adding unique ID number for each task div
-    var text = $('#task-input').val(); // getting text from task input field
+    var text = $('#task-input-ID').val(); // getting text from task input field
     console.log(text) // testing data
     // creating the task div container
     const newDiv = document.createElement("div"); // creating a new div container for the task added by the user
@@ -61,6 +43,25 @@ function addTask(){
     document.body.appendChild(newDiv); // adding task div container to the body of the page
     // ------------------------------------------------------------------------
     i++; // changing the unique ID for the new element to be created
+    // creating an api to communicate between the page and the server (flask server) to send data from the input field (task-input) 
+    // ------------------------------------------------------------------------
+    $.ajax({
+        url : "/addtask", //The url that when routed to it will trigger the API
+        type : "POST", // makes the type of the API POST meaning that it will going to send data to the server not reading data from the server
+        // the data that will be sent
+        contentType: "application/json",
+        data : JSON.stringify({
+            'info' : text
+        }),
+        // a function that if the process was a success it will be triggered
+        success : function(response) {
+            console.log(text);
+        },
+        // a function the if the process was a failure it will be triggered
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
 }
 
 button.addEventListener("click" , addTask); // triggering the addTask function when add task button get clicked
