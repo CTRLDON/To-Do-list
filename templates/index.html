@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'style.css') }}">
 </head>
 <body>
     <h1>Stop Procrastinating..</h1>
@@ -13,6 +13,6 @@
         <button class="add" id="add">Add Task</button>
         <script src="main.js"></script>
     </div>
-    <script src="main.js"></script>
+    <script src="{{ url_for('static',filename='main.js') }}"></script>
 </body>
 </html>

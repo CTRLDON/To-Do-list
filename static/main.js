@@ -9,13 +9,16 @@ function addTask(){
     var text = input.value;
     const newDiv = document.createElement("div");
     newDiv.className = `task task${x}`;
-    newDiv.innerHTML = text;
+    // newDiv.innerText = text;
     const deleteBtn = document.createElement("button");
     deleteBtn.className = `task${x} delete`;
     deleteBtn.innerHTML = "Delete";
     deleteBtn.onclick = function(){
         document.querySelector(`.task.${deleteBtn.classList[0]}`).remove();
     };
+    const taskText = document.createElement("p");
+    taskText.className = "text";
+    taskText.innerHTML = text;
     const finishedBtn = document.createElement("button");
     finishedBtn.className = `done${x} finished`;
     finishedBtn.innerHTML = "Finished";
@@ -23,6 +26,7 @@ function addTask(){
         document.querySelector(`.task.${finishedBtn.classList[0]}`).remove();
     };
     newDiv.appendChild(finishedBtn);
+    newDiv.appendChild(taskText);
     newDiv.appendChild(deleteBtn);
     document.body.appendChild(newDiv);
     i++;
@@ -31,7 +35,7 @@ function addTask(){
 btn.addEventListener("click" , addTask);
 document.addEventListener("keypress",function(event){
     if(event.key == 'Enter'){
-        event.preventDefault(); 
+        event.preventDefault();
         addTask();
     }
 });

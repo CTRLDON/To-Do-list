@@ -65,17 +65,17 @@ h1 {
     display: flex;
     text-align : center;
     margin: 10px auto;
-    width: 40%;
+    width: 50%;
     max-height: 50px;
     color: black;
     background-color: white;
     border-radius: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     .delete{
-        margin-left: auto;
+        /* margin-left: auto; */
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         border: none;
@@ -85,7 +85,7 @@ h1 {
         cursor: pointer;
     }
     .finished {
-        margin-right: auto;
+        /* margin-right: auto; */
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         border: none;
