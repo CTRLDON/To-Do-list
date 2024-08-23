@@ -51,6 +51,7 @@ h1 {
         width: 40%;
     }
     .add {
+        text-decoration: none;
         background-color: white;
         border: none;
         border-radius: 10px;
@@ -86,6 +87,7 @@ h1 {
     }
     .finished {
         /* margin-right: auto; */
+        text-decoration: none;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         border: none;

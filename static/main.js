@@ -6,7 +6,8 @@ function addTask(){
 // add task function, this function will let you input the tasks
 // this is a new note
     const x = i;
-    var text = input.value;
+    var text = $('#task-input').val();
+    console.log(text)
     const newDiv = document.createElement("div");
     newDiv.className = `task task${x}`;
     // newDiv.innerText = text;
@@ -19,11 +20,24 @@ function addTask(){
     const taskText = document.createElement("p");
     taskText.className = "text";
     taskText.innerHTML = text;
-    const finishedBtn = document.createElement("button");
+    const finishedBtn = document.createElement("a");
     finishedBtn.className = `done${x} finished`;
     finishedBtn.innerHTML = "Finished";
+    finishedBtn.href = '/addtask'
     finishedBtn.onclick = function(){
-        document.querySelector(`.task.${finishedBtn.classList[0]}`).remove();
+            $.ajax({
+                url : "/addtask",
+                type : "POST",
+                data : {
+                    'info' : text
+                },
+                success : function(response) {
+                    alert("success");
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
     };
     newDiv.appendChild(finishedBtn);
     newDiv.appendChild(taskText);

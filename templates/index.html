@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
     <link rel="stylesheet" href="{{ url_for('static',filename = 'style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <h1>Stop Procrastinating..</h1>
     <div class="adding-section">
         <input class="task-input" id="task-input" type="text" placeholder="What is your task..." >
-        <button class="add" id="add" type="submit">Add Task</button>
-        <script src="main.js"></script>
+        <button class="add" id="add">Add Task</button>
     </div>
     <script src="{{ url_for('static',filename='main.js') }}"></script>
 </body>

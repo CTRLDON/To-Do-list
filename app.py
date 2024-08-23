@@ -2,6 +2,7 @@ import flask
 from flask_sqlalchemy import SQLAlchemy
 import socket
 import os
+from flask import request
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = flask.Flask(__name__)
@@ -21,7 +22,12 @@ class Task(db.Model):
 def index():
     return flask.render_template("index.html")
 
-
+@app.route('/addtask' , methods=['POST','GET'])
+def addTask():
+    if request.method == 'POST':
+        data = request.form.get('info')
+        print(data)
+        return flask.redirect('/')
 
 
 if __name__ == '__main__':
