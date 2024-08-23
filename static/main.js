@@ -1,10 +1,12 @@
-const btn = document.getElementById("add"); // this is the button variable
-const input = document.getElementById("task-input"); // this is input field constant
+// Add task button
+const button = document.getElementById("add-ID"); 
+// Input text
+const input = document.getElementById("task-input"); 
+
 var i = 1
 
 function addTask(){
-// add task function, this function will let you input the tasks
-// this is a new note
+
     const x = i;
     var text = $('#task-input').val();
     console.log(text)
