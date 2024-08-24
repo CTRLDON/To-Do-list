@@ -17,7 +17,7 @@ function addTaskElement(task){
     deleteBtn.innerHTML = "Delete"; // make the value of the button that appears to the user "Delete"
     // deleting the task div container when the delete button get clicked
     deleteBtn.onclick = function(){ 
-        document.querySelector(`.task.${deleteBtn.classList[0]}`).remove(); //selecting the container using the delete button class name and then removing it 
+        deleteTask(deleteBtn.classList[0] , x); //selecting the container using the delete button class name and then removing it 
     };
     //--------------------------------------------------------------------------
     // adding the task name in the container
@@ -42,7 +42,25 @@ function addTaskElement(task){
     i++; // changing the unique ID for the new element to be created
 }
 
-function deleteTask(){
+function deleteTask(deletebtnClass,id){
+    document.querySelector(`.task.${deletebtnClass}`).remove();
+    $.ajax({
+        url : "/deletetask", //The url that when routed to it will trigger the API
+        type : "POST", // makes the type of the API POST meaning that it will going to send data to the server not reading data from the server
+        // the data that will be sent
+        contentType: "application/json",
+        data : JSON.stringify({
+            'info' : id
+        }),
+        // a function that if the process was a success it will be triggered
+        success : function(response) {
+            console.log(id);
+        },
+        // a function the if the process was a failure it will be triggered
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
 
 }
 

@@ -57,6 +57,18 @@ def addTask():
         cr.close() # closing the cursor
         db.close() # closing the database
     return flask.redirect('/') # returning to the homepage
+# - - - - - - - - - - - - -
+@Flask_object.route('/deletetask',methods=['POST'])
+def deleteTask():
+    db,cr = connect_to_database("database.db")
+    if request.method == 'POST':
+          print('something')
+          data = request.get_json()
+          cr.execute("DELETE FROM todos where id = ?" , (data['info'],))
+          db.commit()
+          cr.close()
+          db.close()
+    return flask.redirect('/')
 # - - - - - - - - - - - - - 
 if __name__ == '__main__':
         hostname = socket.gethostname() # getting the hostname to get the ip address
