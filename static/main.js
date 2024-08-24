@@ -5,7 +5,7 @@ const input = document.getElementById("task-input");
 
 var i = 1 // the unique ID variable
 
-function addTaskElement(taskText){
+function addTaskElement(task){
     const x = i;
     const newDiv = document.createElement("div"); // creating a new div container for the task added by the user
     newDiv.className = `task task${x}`; // assigning a class name for the task div container with the unique ID
@@ -23,7 +23,7 @@ function addTaskElement(taskText){
     // adding the task name in the container
     const taskText = document.createElement("p"); // creates a paragraph element for the task name
     taskText.className = "text"; // assiging a class for the paragraph element
-    taskText.innerHTML = taskText; // adding the task in the paragraph element (what shows up for the user)
+    taskText.innerHTML = task; // adding the task in the paragraph element (what shows up for the user)
     // ------------------------------------------------------------------------
     // adding a finished button for the task div container 
     const finishedBtn = document.createElement("button"); // creating a link element
