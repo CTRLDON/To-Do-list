@@ -6,6 +6,9 @@
     <title>To-Do List</title>
     <link rel="stylesheet" href="{{ url_for('static',filename = 'style.css') }}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        var tasks = {{ tasks | tojson }};
+    </script>
 </head>
 <body>
     <h1>Stop Procrastinating..</h1>
