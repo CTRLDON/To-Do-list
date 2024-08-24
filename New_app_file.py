@@ -39,13 +39,13 @@ Flask_object = Flask_creation_process()
 #routes
 @Flask_object.route('/') # First thing to opened
 def index():
-    db,cr = connect_to_database("database.db")
-    cr.execute("SELECT * from todos")
-    data = cr.fetchall()
-    tasks = [task[1] for task in data]    
+    db,cr = connect_to_database("database.db") # connecting to the database and retrieving the cursor
+    cr.execute("SELECT * from todos") # selecting using the cursor all data saved in the database
+    data = cr.fetchall() # fetching all the data in the database
+    tasks = [task[1] for task in data]  # clearing all the data to get the task names only
     print(tasks)
 
-    return flask.render_template("index.html" , tasks=tasks)
+    return flask.render_template("index.html" , tasks=tasks) # rendering the website with tasks paramter
 # - - - - - - - - - - - - - 
 @Flask_object.route('/addtask' , methods=['POST'])
 def addTask():
@@ -58,17 +58,17 @@ def addTask():
         db.close() # closing the database
     return flask.redirect('/') # returning to the homepage
 # - - - - - - - - - - - - -
-@Flask_object.route('/deletetask',methods=['POST'])
+@Flask_object.route('/deletetask',methods=['POST']) # when routed to deletetask route it will trigger deleteTask function
 def deleteTask():
-    db,cr = connect_to_database("database.db")
-    if request.method == 'POST':
+    db,cr = connect_to_database("database.db") # connecting to the database
+    if request.method == 'POST': # checking if the method is 'POST'
           print('something')
-          data = request.get_json()
-          cr.execute("DELETE FROM todos where id = ?" , (data['info'],))
-          db.commit()
-          cr.close()
-          db.close()
-    return flask.redirect('/')
+          data = request.get_json() # getting data sent by Ajax from the website
+          cr.execute("DELETE FROM todos where id = ?" , (data['info'],)) # deleting the database record based on the data sent by the client
+          db.commit() # saving changes
+          cr.close() # closing the cursor
+          db.close() # closing the database
+    return flask.redirect('/') # returning to the homepage
 # - - - - - - - - - - - - - 
 if __name__ == '__main__':
         hostname = socket.gethostname() # getting the hostname to get the ip address

@@ -66,18 +66,18 @@ function deleteTask(deletebtnClass,id){
 
 function loadTasks(){
     console.log(tasks)
-    if(tasks.length === 0){
+    if(tasks.length === 0){ // checking if the data is none
         console.log("nothing");
-    }else{
+    }else{ // if the data is not empty : 
         for(let j = 0;j<tasks.length;j++){
-            addTaskElement(tasks[j]);
+            addTaskElement(tasks[j]); // loading each task
         }
     }
 }
 
 function addTask(){
     var text = $('#task-input-ID').val(); // getting text from task input field
-    addTaskElement(text);
+    addTaskElement(text); // adding the task element
     $.ajax({
         url : "/addtask", //The url that when routed to it will trigger the API
         type : "POST", // makes the type of the API POST meaning that it will going to send data to the server not reading data from the server
@@ -97,8 +97,8 @@ function addTask(){
     });
 }
 
-window.onload = function(){
-    loadTasks();
+window.onload = function(){ // when the page loads it triggers this function
+    loadTasks(); // loading all tasks saved in the database
 }
 
 button.addEventListener("click" , addTask); // triggering the addTask function when add task button get clicked
