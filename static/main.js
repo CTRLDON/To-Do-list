@@ -3,7 +3,7 @@ const button = document.getElementById("add-ID");
 // Input text
 const input = document.getElementById("task-input"); 
 
-var i = 1 // the unique ID variable
+var i = ids[0] // the unique ID variable
 
 function addTaskElement(task){
     const x = i;
@@ -27,11 +27,11 @@ function addTaskElement(task){
     // ------------------------------------------------------------------------
     // adding a finished button for the task div container 
     const finishedBtn = document.createElement("button"); // creating a link element
-    finishedBtn.className = `done${x} finished`; // assiging a class name for it using the unique ID
+    finishedBtn.className = `task${x} finished`; // assiging a class name for it using the unique ID
     finishedBtn.innerHTML = "Finished"; // make the value of the link that appears to the user "Finished"
     // triggering a fucntion on the click of the finished button that creates an api and sends data to the server with text information
     finishedBtn.onclick = function(){
-            // I don't know what to do yet here
+            doneTask(finishedBtn.classList[0],x);
     };
     // ------------------------------------------------------------------------
     newDiv.appendChild(finishedBtn); // adding finished button to task div container
@@ -51,6 +51,28 @@ function deleteTask(deletebtnClass,id){
         contentType: "application/json",
         data : JSON.stringify({
             'info' : id
+        }),
+        // a function that if the process was a success it will be triggered
+        success : function(response) {
+            console.log(id);
+        },
+        // a function the if the process was a failure it will be triggered
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+
+}
+
+function doneTask(finishedBtnClass,id){
+    document.querySelector(`.task.${finishedBtnClass}`).remove();
+    $.ajax({
+        url : "/donetask", //The url that when routed to it will trigger the API
+        type : "POST", // makes the type of the API POST meaning that it will going to send data to the server not reading data from the server
+        // the data that will be sent
+        contentType: "application/json",
+        data : JSON.stringify({
+            'id' : id
         }),
         // a function that if the process was a success it will be triggered
         success : function(response) {

@@ -16,6 +16,22 @@ h1 {
     margin: 100px auto;
 }
 
+a {
+    text-decoration: none;
+    border: 1px solid white;
+    color : white;
+    position:absolute;
+    bottom: 95%;
+    left: 10px;
+    padding: 5px;
+    border-radius: 30px;
+    transition-duration: 1s;
+}
+a:hover{
+    background-color: white;
+    color: rgb(117, 9, 180);
+}
+
 .todos-box {
     display: block;
     width: 50%;

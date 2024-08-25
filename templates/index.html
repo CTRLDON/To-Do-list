@@ -8,10 +8,12 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         var tasks = {{ tasks | tojson }};
+        var ids = {{ ids | tojson }};
     </script>
 </head>
 <body>
     <h1>Stop Procrastinating..</h1>
+    <a href="/finished-tasks">Done Tasks</a>
     <div class="adding-section">
         <input class="task-input" id="task-input-ID" type="text" placeholder="What is your task..." >
         <button class="add" id="add-ID">Add Task</button>

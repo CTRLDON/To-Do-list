@@ -33,6 +33,22 @@ def connect_to_database(database_name):
      db = sqlite3.connect(database_name)
      cr = db.cursor()
      return (db,cr)
+
+def get_ip_address():
+    # Create a socket object
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    
+    try:
+        # Connect to an external server to determine the IP address
+        s.connect(('8.8.8.8', 80))
+        ip_address = s.getsockname()[0]
+    except Exception as e:
+        print(f"Error: {e}")
+        ip_address = 'localhost'
+    finally:
+        s.close()
+    
+    return ip_address
 #intializing Flask server
 Flask_object = Flask_creation_process()
 
@@ -40,12 +56,13 @@ Flask_object = Flask_creation_process()
 @Flask_object.route('/') # First thing to opened
 def index():
     db,cr = connect_to_database("database.db") # connecting to the database and retrieving the cursor
-    cr.execute("SELECT * from todos") # selecting using the cursor all data saved in the database
+    cr.execute("SELECT task,id from todos where status=?",("unfinished",)) # selecting using the cursor all data saved in the database
     data = cr.fetchall() # fetching all the data in the database
-    tasks = [task[1] for task in data]  # clearing all the data to get the task names only
+    tasks = [task[0] for task in data]  # clearing all the data to get the task names only
+    ids = [int(task[1]) for task in data]
     print(tasks)
 
-    return flask.render_template("index.html" , tasks=tasks) # rendering the website with tasks paramter
+    return flask.render_template("index.html" , tasks=tasks , ids=ids) # rendering the website with tasks paramter
 # - - - - - - - - - - - - - 
 @Flask_object.route('/addtask' , methods=['POST'])
 def addTask():
@@ -69,8 +86,28 @@ def deleteTask():
           cr.close() # closing the cursor
           db.close() # closing the database
     return flask.redirect('/') # returning to the homepage
-# - - - - - - - - - - - - - 
+# - - - - - - - - - - - - -
+@Flask_object.route('/donetask',methods=['POST'])
+def doneTask():
+    db,cr = connect_to_database("database.db")
+    if request.method == 'POST':
+          data = request.get_json() # getting data sent by Ajax from the website
+          print(data)
+          cr.execute("UPDATE todos set status = ? where id = ?" , ("finished",data['id'])) # deleting the database record based on the data sent by the client
+          db.commit() # saving changes
+          cr.close() # closing the cursor
+          db.close() # closing the database
+    return flask.redirect('/') 
+# - - - - - - - - - - - - -
+@Flask_object.route('/finished-tasks')
+def finishedPage():
+     db,cr = connect_to_database("database.db")
+     cr.execute("SELECT task,id FROM todos where status = ?",("finished",))
+     data = cr.fetchall()
+     doneTasks = [task[0] for task in data]
+     doneIds = [task[1] for task in data]
+     return flask.render_template("done.html" , tasks=doneTasks,ids=doneIds)
 if __name__ == '__main__':
-        hostname = socket.gethostname() # getting the hostname to get the ip address
-        ip_address = socket.gethostbyname(hostname) # getting the ip address through the host name
+        
+        ip_address = get_ip_address() # getting the ip address through the host name
         Flask_object.run(ip_address,5050,debug=True) # running the server
