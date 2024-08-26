@@ -56,11 +56,13 @@ Flask_object = Flask_creation_process()
 @Flask_object.route('/') # First thing to opened
 def index():
     db,cr = connect_to_database("database.db") # connecting to the database and retrieving the cursor
-    cr.execute("SELECT task,id from todos where status=?",("unfinished",)) # selecting using the cursor all data saved in the database
+    cr.execute("SELECT task from todos where status = ?",("unfinished",)) # selecting using the cursor all data saved in the database
     data = cr.fetchall() # fetching all the data in the database
+    cr.execute("SELECT id from todos")
+    ids = cr.fetchall()
     tasks = [task[0] for task in data]  # clearing all the data to get the task names only
-    ids = [int(task[1]) for task in data]
-    print(tasks)
+    ids = [int(id[0]) for id in ids]
+    print(ids)
 
     return flask.render_template("index.html" , tasks=tasks , ids=ids) # rendering the website with tasks paramter
 # - - - - - - - - - - - - - 
@@ -69,7 +71,7 @@ def addTask():
     db,cr = connect_to_database("database.db") # connecting to the database and retrieving db and cursor
     if request.method == 'POST': # checking if the method is POST
         data = request.get_json() # getting the json data sent by Ajax api request
-        cr.execute("INSERT into todos(task,status) values(?,?)", (data['info'] , "unfinished")) # inserting the retrieved data into the todo table
+        cr.execute("INSERT into todos(id,task,status) values(?,?,?)", (data['id'],data['name'] , "unfinished")) # inserting the retrieved data into the todo table
         db.commit() # saving the changes in the database
         cr.close() # closing the cursor
         db.close() # closing the database
@@ -79,8 +81,8 @@ def addTask():
 def deleteTask():
     db,cr = connect_to_database("database.db") # connecting to the database
     if request.method == 'POST': # checking if the method is 'POST'
-          print('something')
-          data = request.get_json() # getting data sent by Ajax from the website
+          data = request.get_json()
+        #   data = request.get_json() # getting data sent by Ajax from the website
           cr.execute("DELETE FROM todos where id = ?" , (data['info'],)) # deleting the database record based on the data sent by the client
           db.commit() # saving changes
           cr.close() # closing the cursor

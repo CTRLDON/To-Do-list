@@ -3,7 +3,13 @@ const button = document.getElementById("add-ID");
 // Input text
 const input = document.getElementById("task-input"); 
 
-var i = ids[0] // the unique ID variable
+
+var i; // the unique ID variable
+if(ids.length > 0){
+    i = ids[0];
+}else{
+    i = 0;
+}
 
 function addTaskElement(task){
     const x = i;
@@ -40,6 +46,7 @@ function addTaskElement(task){
     document.body.appendChild(newDiv); // adding task div container to the body of the page
     // ------------------------------------------------------------------------
     i++; // changing the unique ID for the new element to be created
+    return x;
 }
 
 function deleteTask(deletebtnClass,id){
@@ -65,6 +72,7 @@ function deleteTask(deletebtnClass,id){
 }
 
 function doneTask(finishedBtnClass,id){
+    console.log(id);
     document.querySelector(`.task.${finishedBtnClass}`).remove();
     $.ajax({
         url : "/donetask", //The url that when routed to it will trigger the API
@@ -99,14 +107,15 @@ function loadTasks(){
 
 function addTask(){
     var text = $('#task-input-ID').val(); // getting text from task input field
-    addTaskElement(text); // adding the task element
+    const id = addTaskElement(text); // adding the task element
     $.ajax({
         url : "/addtask", //The url that when routed to it will trigger the API
         type : "POST", // makes the type of the API POST meaning that it will going to send data to the server not reading data from the server
         // the data that will be sent
         contentType: "application/json",
         data : JSON.stringify({
-            'info' : text
+            'name' : text,
+            'id' : id
         }),
         // a function that if the process was a success it will be triggered
         success : function(response) {
